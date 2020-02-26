@@ -2,8 +2,8 @@ const ObjectID = require('mongodb').ObjectID;
 const FilmModel = require('../models/FilmModel');
 
 
-exports.fetchFilms = async (req, res) => {
-  await FilmModel.find({})
+exports.fetchFilms = (req, res) => {
+  FilmModel.find({})
   .then((result) => {
     res.send(result);
     console.log('get "/api/films" success');
@@ -14,10 +14,10 @@ exports.fetchFilms = async (req, res) => {
   });
 };
 
-exports.getFilm = async (req, res) => {
+exports.getFilm = (req, res) => {
   const { id } = req.params;
 
-  await FilmModel.findOne({
+  FilmModel.findOne({
     _id: id
   })
   .then((result) => {
@@ -30,10 +30,10 @@ exports.getFilm = async (req, res) => {
   });
 };
 
-exports.createFilm = async (req, res) => {
+exports.createFilm = (req, res) => {
   console.log('req.body', req.body);
 
-  await FilmModel.create(req.body, (err, result) => {
+  FilmModel.create(req.body, (err, result) => {
     if(err) {
       console.log(err);
       res.sendStatus(400);
@@ -43,7 +43,7 @@ exports.createFilm = async (req, res) => {
   });
 };
 
-exports.updateFilm = async (req, res) => {
+exports.updateFilm = (req, res) => {
   const { id } = req.params;
 
   let content = {};
@@ -64,7 +64,7 @@ exports.updateFilm = async (req, res) => {
 
   console.log('content',content);
 
-  await FilmModel.findOneAndUpdate(
+  FilmModel.findOneAndUpdate(
     { _id: ObjectID(id) },
     content,
     { new: true }
