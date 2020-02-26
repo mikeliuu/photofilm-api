@@ -3,12 +3,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const config = require('./config.json');
 
 const filmRouter = require('./routers/filmRouter');
 
 const app = express();
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cms-zll3o.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
+mongoose.connect(`mongodb+srv://${config.DB_USER}:${config.DB_KEY}@cms-zll3o.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
 .then(() => {
   console.log('mongodb connected');
 })
@@ -29,6 +30,6 @@ app.get('/', (req, res) => {
   
 });
 
-app.listen(process.env.WEB_PORT, () => {
-  console.log(`Listening on port: ${process.env.WEB_PORT}`);
+app.listen(config.WEB_PORT, () => {
+  console.log(`Listening on port: ${config.WEB_PORT}`);
 });
