@@ -5,7 +5,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config.json');
 
-const filmRouter = require('./routers/filmRouter');
+const filmsRouter = require('./routers/filmsRouter');
+const postsRouter = require('./routers/postsRouter');
 
 const app = express();
 
@@ -21,11 +22,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true, useFindAndModify: false }));
 app.use(cors());
 
-app.use('/api/films', filmRouter);
-
+app.use('/api/films', filmsRouter);
+app.use('/api/posts', postsRouter);
 
 app.get('/', (req, res) => {
-  res.send('running photofilm api server');
+  res.send('Photofilm API server is running...');
   console.log('get "/" success');
   
 });

@@ -1,5 +1,5 @@
 {
   "WEB_PORT": 8810,
-  "DB_USER": "db_user",
-  "DB_KEY": "db_key"
+  "DB_USER": "key",
+  "DB_KEY": "key"
 }
