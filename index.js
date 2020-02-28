@@ -1,8 +1,10 @@
 require('dotenv').config();
+require("regenerator-runtime/runtime");
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+
 const config = require('./config.json');
 
 const filmsRouter = require('./routers/filmsRouter');
@@ -26,7 +28,7 @@ app.use('/api/films', filmsRouter);
 app.use('/api/posts', postsRouter);
 
 app.get('/', (req, res) => {
-  res.send('Photofilm API server is running...');
+  res.send('Photofilm API server is running');
   console.log('get "/" success');
   
 });
