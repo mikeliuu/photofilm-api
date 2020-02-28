@@ -1,9 +1,9 @@
 const ig = require('instagram-scraping');
 
-exports.fetchPosts = async (req, res) => {
-  const { tag } = await req.params;
+exports.fetchPosts = (req, res) => {
+  const { tag } = req.params;
 
-  const data = await ig.scrapeTag(tag);
+  const data = ig.scrapeTag(tag).then(data => data);
   const NO_OF_POSTS = 30;
 
   const sortByLike = data && data.medias.length > 0 && (data.medias.sort((a,b) => (a.like_count < b.like_count ? 1 : -1)).slice(0,NO_OF_POSTS));
