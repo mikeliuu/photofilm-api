@@ -2,7 +2,7 @@ const ObjectID = require('mongodb').ObjectID;
 const FilmModel = require('../models/FilmModel');
 
 
-exports.fetchFilms = (req, res) => {
+const fetchFilms = (req, res) => {
   FilmModel.find({})
   .then((result) => {
     res.send(result);
@@ -14,7 +14,7 @@ exports.fetchFilms = (req, res) => {
   });
 };
 
-exports.getFilm = (req, res) => {
+const getFilm = (req, res) => {
   const { id } = req.params;
 
   FilmModel.findOne({
@@ -30,7 +30,7 @@ exports.getFilm = (req, res) => {
   });
 };
 
-exports.createFilm = (req, res) => {
+const createFilm = (req, res) => {
   console.log('req.body', req.body);
 
   FilmModel.create(req.body, (err, result) => {
@@ -43,7 +43,7 @@ exports.createFilm = (req, res) => {
   });
 };
 
-exports.updateFilm = (req, res) => {
+const updateFilm = (req, res) => {
   const { id } = req.params;
 
   let content = {};
@@ -77,4 +77,12 @@ exports.updateFilm = (req, res) => {
     console.log(err);
     res.sendStatus(400);
   });
+};
+
+
+module.exports = {
+  fetchFilms,
+  getFilm,
+  createFilm,
+  updateFilm
 };

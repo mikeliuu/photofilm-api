@@ -14,7 +14,7 @@ module.exports = {
     modules: ['node_modules'],
     extensions: ['.js', '.jsx', '.css']
   },
-  target: "node",
+  target: "async-node",
   node: {
     console: false,
     global: false,
@@ -23,6 +23,7 @@ module.exports = {
     __filename: false,
     __dirname: false,
   },
+  
   externals: nodeExternals(), // Need this to avoid error when working with Express
   module: {
     rules: [
