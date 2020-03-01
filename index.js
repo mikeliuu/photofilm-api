@@ -12,13 +12,14 @@ const postsRouter = require('./routers/postsRouter');
 
 const app = express();
 
+if(process.env.NODE_ENV === "development") {
+  config.DB_USER = process.env.DB_USER;
+  config.DB_KEY = process.env.DB_KEY;
+};
+
 mongoose.connect(`mongodb+srv://${config.DB_USER}:${config.DB_KEY}@cms-zll3o.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
-.then(() => {
-  console.log('mongodb connected');
-})
-.catch(err => {
-  console.log(err);
-});
+.then(() => console.log('mongodb connected'))
+.catch(err => console.log(err));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true, useFindAndModify: false }));
