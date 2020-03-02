@@ -33,10 +33,26 @@ const getFilm = (req, res) => {
 const createFilm = (req, res) => {
   console.log('req.body', req.body);
 
+  const slug = req.body.name && (
+    req.body.name.toLowerCase()
+    .trim()
+    .replace(/^\s|\s$/g,'')
+    .replace(/[^a-z0-9 -]/g,'')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '')
+  );
+
+  req.body = {...req.body, seo: {slug}}
+
+  console.log('req.body.seo.slug', req.body.seo.slug);
+  
+
   FilmModel.create(req.body, (err, result) => {
     if(err) {
       console.log(err);
-      res.sendStatus(400);
+      res.send(400);
     }
     res.send(result);
     console.log('post "/api/films/create" success');
