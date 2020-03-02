@@ -26,6 +26,14 @@ const FilmSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  seo: {
+    slug: {
+      type: Object,
+      required: true,
+      default: '',
+      unique: true
+    }
+  },
   created_at: {
     type: Date,
     default: Date.now
