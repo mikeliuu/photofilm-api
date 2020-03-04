@@ -1,44 +1,43 @@
-'use strict'
 const ObjectID = require('mongoose').ObjectID;
 const User = require('../models/UserModel');
 
 const getSignup = (req, res) => {
 
   try {
-
+    res.status(200).json('get signup');
   } 
   catch (err) {
-    return res.send(400).json(err);
+    res.status(400).json(err);
   };
 };
 
 const getLogin = (req, res) => {
 
   try {
-
+    res.status(200).json('get login');
   } 
   catch (err) {
-    return res.send(400).json(err);
+    res.status(400).json(err);
   };
 };
 
 const postSignup = (req, res) => {
 
   try {
-
+    res.status(200).json('post signup');
   } 
   catch (err) {
-    return res.send(400).json(err);
+    res.status(400).json(err);
   };
 };
 
 const postLogin = (req, res) => {
 
   try {
-
+    res.status(200).json('post signup');
   } 
   catch (err) {
-    return res.send(400).json(err);
+    res.status(400).json(err);
   };
 };
 

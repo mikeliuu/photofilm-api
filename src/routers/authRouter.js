@@ -1,4 +1,3 @@
-'use strict'
 const authRouter = require('express').Router();
 const authCTL = require('../controllers/authController');
 

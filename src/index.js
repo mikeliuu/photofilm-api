@@ -1,4 +1,3 @@
-'use strict'
 require('dotenv').config();
 require("regenerator-runtime/runtime");
 const express = require('express');
@@ -10,7 +9,7 @@ const config = require('../config.json');
 
 const filmsRouter = require('./routers/filmsRouter');
 const postsRouter = require('./routers/postsRouter');
-const authRouter = require('./controllers/authController');
+const authRouter = require('./routers/authRouter');
 
 const app = express();
 
