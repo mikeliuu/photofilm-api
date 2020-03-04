@@ -1,3 +1,4 @@
+'use strict'
 const filmsRouter = require('express').Router();
 const filmsCTL = require('../controllers/filmsController');
 

@@ -1,3 +1,4 @@
+'use strict'
 const postsRouter = require('express').Router();
 const postsCTL = require('../controllers/postsController');
 

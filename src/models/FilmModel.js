@@ -1,3 +1,4 @@
+'use strict'
 const mongoose = require('mongoose');
 const FilmSchema = new mongoose.Schema({
   name: {
@@ -45,7 +46,7 @@ const FilmSchema = new mongoose.Schema({
 },
 { 
   versionKey: false 
-})
+});
 
 const Film = mongoose.model('Film', FilmSchema);
 
