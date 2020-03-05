@@ -37,7 +37,7 @@ const validateLogin = data => {
       .string()
       .required()
       .min(6)
-  });
+  }).unknown(true);;
 
   return schema.validate(data);
 };
