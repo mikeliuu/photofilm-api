@@ -1,3 +1,5 @@
+'use strict';
+
 const Joi = require('@hapi/joi');
 
 const validateSignup = data => {
@@ -15,11 +17,11 @@ const validateSignup = data => {
       .string()
       .required()
       .min(6),
-    passwordConfirm: Joi
-    .string()
-    .required()
-    .min(6)
-  });
+      password: Joi
+      .string()
+      .required()
+      .min(6),
+  }).unknown(true);
 
   return schema.validate(data);
 };

@@ -1,5 +1,7 @@
 const User = require('../models/UserModel');
 const { validateSignup, validateLogin } = require('../services/validation');
+const bcrypt = require('bcrypt');
+
 
 const getSignup = (req, res) => {
   
@@ -24,22 +26,29 @@ const getLogin = (req, res) => {
 const postSignup = async (req, res) => {
 
   const { error } = validateSignup(req.body);
+
   if(error) return res.status(400).send(error.details[0].message);
 
-  if(req.body.password !== req.body.passwordConfirm) return res.status(400).send('Password does not match.');
+  if(req.body.password !== req.body.confirmPassword) return res.status(400).send('Password does not match.');
 
   const emailExsit = await User.findOne({ email: req.body.email });
   if(emailExsit) return res.status(400).send('Email address already exists');
 
+  const salt = 10;
+  const hashPassword = await bcrypt.hash(req.body.password, salt);
+
+  if(!hashPassword) return res.status(400).send('Password cannot be saved, please try again');
+
   const user = new User({
-    username: req.body.name,
+    username: req.body.username,
     email: req.body.email,
-    password: req.body.password
+    password: hashPassword
   });
 
   try {
-    const savedUser = await user.save();
-    res.status(200).send(savedUser);
+    await user.save();
+
+    res.status(200).send('You are signed up!');
   } 
   catch (err) {
     res.status(400).send(err);
@@ -49,7 +58,7 @@ const postSignup = async (req, res) => {
 const postLogin = (req, res) => {
 
   try {
-    res.status(200).send('post signup');
+    res.status(200).send('post login');
   } 
   catch (err) {
     res.status(400).send(err);

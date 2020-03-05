@@ -2,10 +2,10 @@
   "name": "photofilm-cms",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "build": "webpack --config ./webpack.prod.js",
-    "dev": "nodemon ./src/index.js",
+    "dev": "nodemon ./src/app.js",
     "start": "nodemon ./dist/js/bundle.js"
   },
   "keywords": [],
