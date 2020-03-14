@@ -49,8 +49,9 @@ const postSignup = async (req, res) => {
 
   try {
     await user.save();
-
-    res.status(200).send('You have signed up successfully');
+    console.log(`postSignup [${user.username}] success`);
+    
+    res.status(200).send('Signed up successfully, please login');
   } 
   catch (err) {
     res.status(400).send(err);

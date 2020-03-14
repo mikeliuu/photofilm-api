@@ -7,20 +7,19 @@ const validateSignup = data => {
     username: Joi
       .string()
       .required()
-      .min(6),
+      .min(4),
     email: Joi
       .string()
       .required()
-      .min(6)
       .email(),
     password: Joi
       .string()
       .required()
-      .min(6),
-      password: Joi
+      .min(4),
+    password: Joi
       .string()
       .required()
-      .min(6),
+      .min(4),
   }).unknown(true);
 
   return schema.validate(data);
@@ -31,12 +30,12 @@ const validateLogin = data => {
     email: Joi
       .string()
       .required()
-      .min(6)
+      .min(4)
       .email(),
     password: Joi
       .string()
       .required()
-      .min(6)
+      .min(4)
   }).unknown(true);;
 
   return schema.validate(data);
