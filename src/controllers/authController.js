@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const getSignup = (req, res) => {
   
   try {
+    console.log('get "/api/auth/signup" success');
     res.status(200).send('get signup');
   } 
   catch (err) {
@@ -18,6 +19,7 @@ const getSignup = (req, res) => {
 const getLogin = (req, res) => {
 
   try {
+    console.log('get "/api/auth/login" success');
     res.status(200).send('get login');
   } 
   catch (err) {
@@ -49,7 +51,7 @@ const postSignup = async (req, res) => {
 
   try {
     await user.save();
-    console.log(`postSignup [${user.username}] success`);
+    console.log(`post signup [${user.username}] success`);
     
     res.status(200).send('Signed up successfully, please login');
   } 
@@ -72,6 +74,8 @@ const postLogin = async (req, res) => {
 
   try {
     const token = await jwt.sign({_id: user._id}, process.env.TOKEN_SECRET, {expiresIn: '1h'});
+
+    console.log(`post login [${user._id}] success`);
 
     res.header('Authorization', `Bearer ${token}`).send(token);
   } 
