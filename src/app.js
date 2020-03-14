@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config();
 require("regenerator-runtime/runtime");
 const express = require('express');
 const bodyParser = require('body-parser');
