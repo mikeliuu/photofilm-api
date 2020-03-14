@@ -3,7 +3,7 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const nodeExternals = require('webpack-node-externals');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -59,13 +59,13 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new Dotenv(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-        'DB_USER': JSON.stringify(process.env.DB_USER),
-        'DB_KEY': JSON.stringify(process.env.DB_KEY),
-        'TOKEN_SECRET': JSON.stringify(process.env.TOKEN_SECRET)
-      }
-    })
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+    //     'DB_USER': JSON.stringify(process.env.DB_USER),
+    //     'DB_KEY': JSON.stringify(process.env.DB_KEY),
+    //     'TOKEN_SECRET': JSON.stringify(process.env.TOKEN_SECRET)
+    //   }
+    // })
   ]
 }
