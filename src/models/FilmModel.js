@@ -45,7 +45,7 @@ const FilmSchema = new mongoose.Schema({
 },
 { 
   versionKey: false 
-})
+});
 
 const Film = mongoose.model('Film', FilmSchema);
 

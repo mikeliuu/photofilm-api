@@ -4,6 +4,8 @@ const fetchPosts = async (req, res) => {
   const { tag } = req.params;
 
   try{
+    // https://www.instagram.com/web/search/topsearch/?context=blended&query=avengers
+    // https://www.instagram.com/explore/tags/prague/
     const posts = await ig.scrapeTag(tag)
     .then(data => {
       console.log('data 1', data.total);
