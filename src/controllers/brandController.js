@@ -1,13 +1,13 @@
 const BrandModel = require('../models/BrandModel');
 
-const fetchBrand = (req, res) => {
+const fetchBrands = (req, res) => {
   BrandModel.find({})
   .then((result) => {
     res.send(result);
-    console.log('get "/api/brand" success');
+    console.log('get "/api/brands" success');
   })
   .catch(err => {
-    console.log('fetchBrand error', err);
+    console.log('fetchBrands error', err);
     res.sendStatus(400);
   });
 };
@@ -21,11 +21,11 @@ const createBrand = (req, res) => {
       res.send(400);
     }
     res.send(result);
-    console.log('post "/api/brand/create" success');
+    console.log('post "/api/brands/create" success');
   });
 };
 
 module.exports = {
-  fetchBrand,
+  fetchBrands,
   createBrand
 };
