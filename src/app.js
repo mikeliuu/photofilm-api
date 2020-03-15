@@ -10,6 +10,7 @@ const config = require('../config.json');
 const filmsRouter = require('./routers/filmsRouter');
 const postsRouter = require('./routers/postsRouter');
 const authRouter = require('./routers/authRouter');
+const brandRouter = require('./routers/brandRouter');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(cors());
 app.use('/api/films', filmsRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/brand', brandRouter);
 
 app.get('/', (req, res) => {
   res.send('Photofilm API server is running');

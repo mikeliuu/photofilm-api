@@ -36,11 +36,13 @@ const FilmSchema = new mongoose.Schema({
   },
   created_at: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: true
   },
   updated_at: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: true
   }
 },
 { 
