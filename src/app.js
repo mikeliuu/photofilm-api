@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const config = require('../config.json');
 
 const filmsRouter = require('./routers/filmsRouter');
+const brandRouter = require('./routers/brandRouter');
 const postsRouter = require('./routers/postsRouter');
 const authRouter = require('./routers/authRouter');
 
@@ -18,7 +19,7 @@ if(process.env.NODE_ENV === "development") {
   config.DB_KEY = process.env.DB_KEY;
 };
 
-mongoose.connect(`mongodb+srv://${config.DB_USER}:${config.DB_KEY}@cms-zll3o.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
+mongoose.connect(`mongodb+srv://${config.DB_USER}:${config.DB_KEY}@cms-zll3o.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
 .then(() => console.log('mongodb connected'))
 .catch(err => console.log(err));
 
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true, useFindAndModify: false }));
 app.use(cors());
 
 app.use('/api/films', filmsRouter);
+app.use('/api/brands', brandRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/auth', authRouter);
 

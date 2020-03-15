@@ -4,28 +4,34 @@ const FilmModel = require('../models/FilmModel');
 
 const fetchFilms = (req, res) => {
   FilmModel.find({})
+  .populate('brand', 'name')
+  .exec()
   .then((result) => {
     res.send(result);
     console.log('get "/api/films" success');
   })
   .catch(err => {
-    console.log(err);
+    console.log('fetchFilms error', err);
     res.sendStatus(400);
   });
 };
 
 const getFilm = (req, res) => {
-  const { id } = req.params;
+  const { slug } = req.params;
 
   FilmModel.findOne({
-    _id: id
+    seo: {
+      slug
+    }
   })
+  .populate('brand', 'name')
+  .exec()
   .then((result) => {
     res.send(result);
-    console.log(`get "/api/films/${id}" success`);
+    console.log(`get "/api/films/${slug}" success`);
   })
   .catch(err => {
-    console.log(err);
+    console.log('getFilm error', err);
     res.sendStatus(400);
   });
 };
@@ -47,11 +53,10 @@ const createFilm = (req, res) => {
   req.body = {...req.body, seo: {slug}}
 
   console.log('req.body.seo.slug', req.body.seo.slug);
-  
 
   FilmModel.create(req.body, (err, result) => {
     if(err) {
-      console.log(err);
+      console.log('createFilm error', err);
       res.send(400);
     }
     res.send(result);
@@ -90,7 +95,7 @@ const updateFilm = (req, res) => {
     console.log(`put "/api/films/${id}" success`);
   })
   .catch(err => {
-    console.log(err);
+    console.log('updateFilm error', err);
     res.sendStatus(400);
   });
 };

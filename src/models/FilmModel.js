@@ -5,7 +5,8 @@ const FilmSchema = new mongoose.Schema({
     required: true
   },
   brand: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Brand',
     required: true
   },
   saved: {
@@ -36,11 +37,13 @@ const FilmSchema = new mongoose.Schema({
   },
   created_at: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: true
   },
   updated_at: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    required: true
   }
 },
 { 
