@@ -65,7 +65,7 @@ const createFilm = (req, res) => {
 };
 
 const updateFilm = (req, res) => {
-  const { id } = req.params;
+  const { id } = req.body;
 
   let content = {};
 
