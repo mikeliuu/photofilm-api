@@ -35,6 +35,16 @@ const FilmSchema = new mongoose.Schema({
       unique: true
     }
   },
+  price: {
+    type: Number,
+    default: 0,
+    required: true
+  },
+  currency: {
+    type: String,
+    default: 'hkd',
+    required: true
+  },
   created_at: {
     type: Date,
     default: Date.now,

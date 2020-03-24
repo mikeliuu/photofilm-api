@@ -11,6 +11,7 @@ const filmsRouter = require('./routers/filmsRouter');
 const brandRouter = require('./routers/brandRouter');
 const postsRouter = require('./routers/postsRouter');
 const authRouter = require('./routers/authRouter');
+const transactionRouter = require('./routers/transactionRouter');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use('/api/films', filmsRouter);
 app.use('/api/brands', brandRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/transactions', transactionRouter);
 
 app.get('/', (req, res) => {
   res.send('Photofilm API server is running');
