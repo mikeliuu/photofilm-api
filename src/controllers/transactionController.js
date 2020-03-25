@@ -6,21 +6,40 @@ const fetchBestSellers = (req, res) => {
   TransactionModel.find({})
   .then((result) => {
 
-    //purchasedFilms should have 3
-    const purchasedFilms = (result && result.length > 0) && result.filter(i => i.paid === true);
+    //sort out paid record
+    const paidRecords = (result && result.length > 0) && result.filter(i => i.paid === true);
 
-    //map items
-    const mapItems = purchasedFilms && purchasedFilms.reduce((total, list) => {
-      list.items.forEach(film => {
-        total.push({"film": film.name, "brand": film.brand.name, "quantity": 1})
-      });
-
-      return total;
+    //records mapping
+    const mappedRecords = paidRecords.reduce((acc, cur) => {
+      cur.items.forEach(film => acc.push({
+          "_id": film._id,
+          "name": film.name,
+          "brand": film.brand,
+          "sold": 1
+        })
+      );
+      return acc;
     }, []);
 
-    console.log(mapItems);
-    
-    res.send(purchasedFilms);
+    //reults
+    const bestSellers = mappedRecords.reduce((acc, val) => {
+      let item = acc.filter(i => {
+        return i.item.name === val.name && i.item.brand.name === val.brand.name;
+      }).pop() || {
+        "item": {
+          "_id": val._id,
+          "name": val.name,
+          "brand": val.brand
+        }, 
+        "sold": 0
+      };
+
+      item.sold += val.sold;
+      acc.push(item);
+      return acc;
+    }, []).filter((itm, index, arr) => index === arr.indexOf(itm)).sort((prev, next) => next.sold - prev.sold);
+
+    res.send(bestSellers);
 
     console.log('get "/api/transactions/bestsellers" success');
   })
@@ -29,6 +48,7 @@ const fetchBestSellers = (req, res) => {
     res.sendStatus(400);
   });
 };
+
 
 const createTransaction = async (req, res) => {
   console.log('createTransaction post req.body', req.body);
@@ -59,6 +79,7 @@ const createTransaction = async (req, res) => {
     console.log('post "/api/transactions/create" success');
   });
 };
+
 
 module.exports = {
   fetchBestSellers,
