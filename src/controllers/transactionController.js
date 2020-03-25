@@ -1,4 +1,5 @@
 const TransactionModel = require('../models/TransactionModel');
+const stripe = require('../services/stripe');
 // const ObjectID = require('mongodb').ObjectID;
 // const FilmModel = require('../models/FilmModel');
 
@@ -21,7 +22,7 @@ const fetchBestSellers = (req, res) => {
       return acc;
     }, []);
 
-    //reults
+    //reults sort by sold
     const bestSellers = mappedRecords.reduce((acc, val) => {
       let item = acc.filter(i => {
         return i.item.name === val.name && i.item.brand.name === val.brand.name;
@@ -50,8 +51,18 @@ const fetchBestSellers = (req, res) => {
 };
 
 
-const createTransaction = async (req, res) => {
-  console.log('createTransaction post req.body', req.body);
+const createPaymentIntent = async (req, res) => {
+  console.log('createPaymentIntent post req.body', req.body);
+
+  const { amount, currency } = req.body;
+
+  stripe.paymentIntent(amount, currency);
+
+  res.send({
+    publishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
+    clientSecret: stripe.paymentIntent.client_secret
+  });
+
 
   // temp data
   // const film = await FilmModel.find({
@@ -70,18 +81,18 @@ const createTransaction = async (req, res) => {
   //   "created_at": "2020-03-24T16:07:50.958Z"
   // }
 
-  TransactionModel.create(req.body, (err, result) => {
-    if(err) {
-      console.log('createTransaction error', err);
-      res.send(400);
-    }
-    res.send(result);
-    console.log('post "/api/transactions/create" success');
-  });
+  // TransactionModel.create(req.body, (err, result) => {
+  //   if(err) {
+  //     console.log('createTransaction error', err);
+  //     res.send(400);
+  //   }
+  //   res.send(result);
+  //   console.log('post "/api/transactions/create-payment-intent" success');
+  // });
 };
 
 
 module.exports = {
   fetchBestSellers,
-  createTransaction
+  createPaymentIntent
 };

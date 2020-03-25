@@ -15,14 +15,19 @@ const transactionRouter = require('./routers/transactionRouter');
 
 const app = express();
 
-if(process.env.NODE_ENV === "development") {
-  config.DB_USER = process.env.DB_USER;
-  config.DB_KEY = process.env.DB_KEY;
-};
+//config
+// if(process.env.NODE_ENV === "development") {
+//   config.DB_USER = process.env.DB_USER;
+//   config.DB_KEY = process.env.DB_KEY;
+//   config.STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
+//   config.STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY;
+// };
 
-mongoose.connect(`mongodb+srv://${config.DB_USER}:${config.DB_KEY}@cms-zll3o.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
+
+mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_KEY}@cms-zll3o.mongodb.net/test?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
 .then(() => console.log('mongodb connected'))
 .catch(err => console.log(err));
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true, useFindAndModify: false }));
@@ -39,6 +44,6 @@ app.get('/', (req, res) => {
   console.log('get "/" success');
 });
 
-app.listen(config.WEB_PORT, () => {
-  console.log(`Listening on port: ${config.WEB_PORT}`);
+app.listen(process.env.WEB_PORT, () => {
+  console.log(`Listening on port: ${process.env.WEB_PORT}`);
 });

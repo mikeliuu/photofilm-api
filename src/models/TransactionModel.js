@@ -13,7 +13,7 @@ const TransactionSchema = new mongoose.Schema({
   },
   currency: {
     type: String,
-    default: 'HKD',
+    default: 'hkd',
     required: true
   },
   status: {
