@@ -4,15 +4,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const app = express();
 
 const config = require('../config.json');
-
-const filmsRouter = require('./routers/filmsRouter');
-const brandRouter = require('./routers/brandRouter');
-const postsRouter = require('./routers/postsRouter');
-const authRouter = require('./routers/authRouter');
-
-const app = express();
+const apiRouter = require('./routes/index');
 
 if(process.env.NODE_ENV === "development") {
   config.DB_USER = process.env.DB_USER;
@@ -27,10 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true, useFindAndModify: false }));
 app.use(cors());
 
-app.use('/api/films', filmsRouter);
-app.use('/api/brands', brandRouter);
-app.use('/api/posts', postsRouter);
-app.use('/api/auth', authRouter);
+app.use('/api', apiRouter);
 
 app.get('/', (req, res) => {
   res.send('Photofilm API server is running');

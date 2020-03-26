@@ -1,5 +1,5 @@
 const postsRouter = require('express').Router();
-const postsCTL = require('../controllers/postsController');
+const postsCTL = require('../../controllers/postsController');
 
 postsRouter.get('/:tag', postsCTL.fetchPosts);
 
