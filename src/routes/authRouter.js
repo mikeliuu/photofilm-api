@@ -1,5 +1,5 @@
 const authRouter = require('express').Router();
-const authCTL = require('../../controllers/authController');
+const authCTL = require('../controllers/authController');
 
 authRouter.get('/signup', authCTL.getSignup);
 authRouter.get('/login', authCTL.getLogin);
